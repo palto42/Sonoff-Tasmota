@@ -28,11 +28,12 @@
  * Use online command StateText to translate ON, OFF, HOLD and TOGGLE.
  * Use online command Prefix to translate cmnd, stat and tele.
  *
- * Updated until v5.14.0
+ * Updated until v6.0.0a
 \*********************************************************************/
 
 //#define LANGUAGE_MODULE_NAME         // Enable to display "Module Generic" (ie Spanish), Disable to display "Generic Module" (ie English)
 
+#define LANGUAGE_LCID 1043
 // HTML (ISO 639-1) Language Code
 #define D_HTML_LANGUAGE "nl"
 
@@ -204,7 +205,8 @@
 #define D_USE_DEFAULTS "Gebruik standaardwaarden"
 #define D_ERASED_SECTOR "Wis sector"
 
-// webserver.ino
+// xdrv_02_webserver.ino
+#define D_NOSCRIPT "Zet JavaScript aan voor Tasmota"
 #define D_MINIMAL_FIRMWARE_PLEASE_UPGRADE "MINIMAL firmware - opwaarderen"
 #define D_WEBSERVER_ACTIVE_ON "Webserver actief op"
 #define D_WITH_IP_ADDRESS "met IP adres"
@@ -320,13 +322,17 @@
 #define D_UPLOAD_ERR_7 "Opwaarderen afgebroken"
 #define D_UPLOAD_ERR_8 "Ongeldig bestand"
 #define D_UPLOAD_ERR_9 "Bestand is te groot"
+#define D_UPLOAD_ERR_10 "Init RF chip mislukt"
+#define D_UPLOAD_ERR_11 "Wissen RF chip mislukt"
+#define D_UPLOAD_ERR_12 "Opwaarderen RF chip mislukt"
+#define D_UPLOAD_ERR_13 "Decoderen RF bestand mislukt"
 #define D_UPLOAD_ERROR_CODE "Opwaardeer foutcode"
 
 #define D_ENTER_COMMAND "Geef opdracht"
 #define D_ENABLE_WEBLOG_FOR_RESPONSE "Schakel weblog 2 in indien antwoord verwacht"
 #define D_NEED_USER_AND_PASSWORD "Benodig user=<gebruiker>&password=<webwachtwoord>"
 
-// xdrv_00_mqtt.ino
+// xdrv_01_mqtt.ino
 #define D_FINGERPRINT "Controleer TLS vingerafdruk..."
 #define D_TLS_CONNECT_FAILED_TO "TLS Verbinding mislukt naar"
 #define D_RETRY_IN "Opnieuw proberen over"
@@ -334,7 +340,7 @@
 #define D_INSECURE "Door ongeldige vingerafdruk een onveilige verbinding"
 #define D_CONNECT_FAILED_TO "Verbinding mislukt naar"
 
-// xdrv_wemohue.ino
+// xplg_wemohue.ino
 #define D_MULTICAST_DISABLED "Multicast uitgeschakeld"
 #define D_MULTICAST_REJOINED "Multicast verbonden"
 #define D_MULTICAST_JOIN_FAILED "Multicast verbinding mislukt"
@@ -354,7 +360,7 @@
 #define D_HUE_POST_ARGS "Hue POST argumenten"
 #define D_3_RESPONSE_PACKETS_SENT "3 antwoord paketten verstuurd"
 
-// xdrv_05_domoticz.ino
+// xdrv_07_domoticz.ino
 #define D_DOMOTICZ_PARAMETERS "Domoticz parameters"
 #define D_DOMOTICZ_IDX "Idx"
 #define D_DOMOTICZ_KEY_IDX "Toets idx"
@@ -374,6 +380,7 @@
 // xdrv_09_timers.ino
 #define D_CONFIGURE_TIMER "Configureer Tijdschakelaar"
 #define D_TIMER_PARAMETERS "Tijdschakelaar parameters"
+#define D_TIMER_ENABLE "Tijdschakelaars inschakelen"
 #define D_TIMER_ARM "Actief"
 #define D_TIMER_TIME "Tijd"
 #define D_TIMER_DAYS "Dagen"
@@ -400,6 +407,9 @@
 #define D_KNX_COMMAND_OTHER "Overige"
 #define D_SENT_TO "verzend naar"
 #define D_KNX_WARNING "Groep adres (0/0/0) is gereserveerd en mag niet worden gebruikt."
+#define D_KNX_ENHANCEMENT "Verbeter verbinding"
+#define D_KNX_TX_SLOT "KNX TX"
+#define D_KNX_RX_SLOT "KNX RX"
 
 // xdrv_03_energy.ino
 #define D_ENERGY_TODAY "Verbruik vandaag"
@@ -426,6 +436,14 @@
 #define D_STANDARD_CONCENTRATION "CF-1 PM"     // Standard Particle CF-1 Particle Matter
 #define D_ENVIRONMENTAL_CONCENTRATION "PM"     // Environmetal Particle Matter
 #define D_PARTICALS_BEYOND "Stofdeeltjes"
+
+// xsns_32_mpu6050.ino
+#define D_AX_AXIS "Accel. X-Axis"
+#define D_AY_AXIS "Accel. Y-Axis"
+#define D_AZ_AXIS "Accel. Z-Axis"
+#define D_GX_AXIS "Gyro X-Axis"
+#define D_GY_AXIS "Gyro Y-Axis"
+#define D_GZ_AXIS "Gyro Z-Axis"
 
 // sonoff_template.h
 #define D_SENSOR_NONE     "Geen"
@@ -461,6 +479,11 @@
 #define D_SENSOR_SR04_ECHO "SR04 Ech"
 #define D_SENSOR_SDM120_TX "SDM120 Tx"
 #define D_SENSOR_SDM120_RX "SDM120 Rx"
+#define D_SENSOR_SDM630_TX "SDM630 Tx"
+#define D_SENSOR_SDM630_RX "SDM630 Rx"
+#define D_SENSOR_TM1638_CLK "TM16 CLK"
+#define D_SENSOR_TM1638_DIO "TM16 DIO"
+#define D_SENSOR_TM1638_STB "TM16 STB"
 
 // Units
 #define D_UNIT_AMPERE "A"

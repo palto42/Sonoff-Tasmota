@@ -33,6 +33,7 @@
 
 //#define LANGUAGE_MODULE_NAME         // Enable to display "Module Generic" (ie Spanish), Disable to display "Generic Module" (ie English)
 
+#define LANGUAGE_LCID 1049
 // HTML (ISO 639-1) Language Code
 #define D_HTML_LANGUAGE "ru"
 
@@ -204,7 +205,8 @@
 #define D_USE_DEFAULTS "Использовать значение по умолчанию"
 #define D_ERASED_SECTOR "Стереть сектор"
 
-// webserver.ino
+// xdrv_02_webserver.ino
+#define D_NOSCRIPT "To use Tasmota, please enable JavaScript"
 #define D_MINIMAL_FIRMWARE_PLEASE_UPGRADE "Прошивка MINIMAL - пожалуйста обновите"
 #define D_WEBSERVER_ACTIVE_ON "Веб-сервер активен"
 #define D_WITH_IP_ADDRESS "с IP-адресом"
@@ -320,13 +322,17 @@
 #define D_UPLOAD_ERR_7 "Загрузка прервана"
 #define D_UPLOAD_ERR_8 "Файл неверный"
 #define D_UPLOAD_ERR_9 "Слишком большой файл"
+#define D_UPLOAD_ERR_10 "Failed to init RF chip"
+#define D_UPLOAD_ERR_11 "Failed to erase RF chip"
+#define D_UPLOAD_ERR_12 "Failed to write to RF chip"
+#define D_UPLOAD_ERR_13 "Failed to decode RF firmware"
 #define D_UPLOAD_ERROR_CODE "Код ошибки загрузки"
 
 #define D_ENTER_COMMAND "Введите команду"
 #define D_ENABLE_WEBLOG_FOR_RESPONSE "Включить Веб лог уровня 2 если ожидается ответ"
 #define D_NEED_USER_AND_PASSWORD "Ожидается user=<username>&password=<password>"
 
-// xdrv_00_mqtt.ino
+// xdrv_01_mqtt.ino
 #define D_FINGERPRINT "Проверка TLS Fingerprint..."
 #define D_TLS_CONNECT_FAILED_TO "Сбой подключения TLS к"
 #define D_RETRY_IN "Повторить"
@@ -334,7 +340,7 @@
 #define D_INSECURE "Небезопасное соединение, недействительный Fingerprint"
 #define D_CONNECT_FAILED_TO "Ошибка подключения к"
 
-// xdrv_wemohue.ino
+// xplg_wemohue.ino
 #define D_MULTICAST_DISABLED "Multicast отключен"
 #define D_MULTICAST_REJOINED "Multicast (ре)соединился"
 #define D_MULTICAST_JOIN_FAILED "Multicast ошибка соединения"
@@ -354,7 +360,7 @@
 #define D_HUE_POST_ARGS "Hue POST args"
 #define D_3_RESPONSE_PACKETS_SENT "3 ответных пакета получено"
 
-// xdrv_05_domoticz.ino
+// xdrv_07_domoticz.ino
 #define D_DOMOTICZ_PARAMETERS "Domoticz parameters"
 #define D_DOMOTICZ_IDX "Idx"
 #define D_DOMOTICZ_KEY_IDX "Key idx"
@@ -374,6 +380,7 @@
 // xdrv_09_timers.ino
 #define D_CONFIGURE_TIMER "Configure Timer"
 #define D_TIMER_PARAMETERS "Timer parameters"
+#define D_TIMER_ENABLE "Enable Timers"
 #define D_TIMER_ARM "Arm"
 #define D_TIMER_TIME "Time"
 #define D_TIMER_DAYS "Days"
@@ -400,6 +407,9 @@
 #define D_KNX_COMMAND_OTHER "Other"
 #define D_SENT_TO "sent to"
 #define D_KNX_WARNING "The group address ( 0 / 0 / 0 ) is reserved and can not be used."
+#define D_KNX_ENHANCEMENT "Communication Enhancement"
+#define D_KNX_TX_SLOT "KNX TX"
+#define D_KNX_RX_SLOT "KNX RX"
 
 // xdrv_03_energy.ino
 #define D_ENERGY_TODAY "Энергия Сегодня"
@@ -426,6 +436,14 @@
 #define D_STANDARD_CONCENTRATION "CF-1 PM"     // Standard Particle CF-1 Particle Matter
 #define D_ENVIRONMENTAL_CONCENTRATION "PM"     // Environmetal Particle Matter
 #define D_PARTICALS_BEYOND "Particals"
+
+// xsns_32_mpu6050.ino
+#define D_AX_AXIS "Accel. X-Axis"
+#define D_AY_AXIS "Accel. Y-Axis"
+#define D_AZ_AXIS "Accel. Z-Axis"
+#define D_GX_AXIS "Gyro X-Axis"
+#define D_GY_AXIS "Gyro Y-Axis"
+#define D_GZ_AXIS "Gyro Z-Axis"
 
 // sonoff_template.h
 #define D_SENSOR_NONE     "-нет-"
@@ -461,6 +479,11 @@
 #define D_SENSOR_SR04_ECHO "SR04 Ech"
 #define D_SENSOR_SDM120_TX "SDM120 Tx"
 #define D_SENSOR_SDM120_RX "SDM120 Rx"
+#define D_SENSOR_SDM630_TX "SDM630 Tx"
+#define D_SENSOR_SDM630_RX "SDM630 Rx"
+#define D_SENSOR_TM1638_CLK "TM16 CLK"
+#define D_SENSOR_TM1638_DIO "TM16 DIO"
+#define D_SENSOR_TM1638_STB "TM16 STB"
 
 // Units
 #define D_UNIT_AMPERE "А"

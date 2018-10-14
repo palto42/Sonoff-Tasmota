@@ -1,4 +1,134 @@
-/* 5.14.0 20180515
+/* 6.2.1 20180905
+ * Fix possible ambiguity on command parameters if StateText contains numbers only (#3656)
+ * Fix Wemo emulation to select the first relay when more than one relay is present (#3657)
+ * Fix possible exception due to buffer overflow (#3659)
+ * Fix lost energy today and total energy value after power cycle (#3689)
+ *
+ * 6.2.0 20180901
+ * Allow user override of define MAX_RULE_VARS and MAX_RULE_TIMERS (#3561)
+ * Disable wifi sleep for both Esp8266/Arduino core 2.4.1 and 2.4.2 to solve device freeze caused by Espressif SDK bug (#3554)
+ * Change DS18B20 driver to provide better instant results
+ * Change some sensor drivers to provide instant results
+ * Change define USE_ALL_SENSORS to USE_SENSORS as it doesn't contain all sensors due to duplicate I2C addresses
+ * Change some sensor update timings: AdcEvery 200 -> 250, Senseair 300 -> 250, SDM120 300 -> 250, SDM630 300 -> 250
+ * Change default Wifi config option from WPS to Wifi Manager if WPS is disabled or Wifi Smartconfig if webserver is disabled or Wifi Serial input if Smartconfig is disabled
+ * Change SHT1x driver to provide better instant results and fix I2C interference
+ * Change DHT driver to provide better instant results and add decimals to DHT11 (#3164)
+ * Change DS18x20 driver to provide better instant results (#3169)
+ * Change CounterType 1 from milliseconds to microseconds (#3437)
+ * Change scheduler for better sleep support using Uptime, Delay, PulseTime and TelePeriod, Blinktime (#3581)
+ * Remove unused functionality from Sonoff-minimal to save space
+ * Remove WPS and SmartConfig from sonoff-minimal saving 56k code space
+ * Remove TSL2561 debug message and update library (#2415)
+ * Remove forced restart when sleep command is executed (#3554)
+ * Fix invalid response using more than 4 switches and domoticz
+ * Fix sonoff-minimal not using default settings
+ * Fix unsecure main webpage update
+ * Fix DHT driver mixing values for different sensors (#1797)
+ * Fix EnergyReset3 regression not clearing total energy (#2723)
+ * Fix rules once regression from v6.1.0 (#3198, #3226)
+ * Fix command Scale buffer overflow (#3236)
+ * Fix possible WDT due to long MQTT publish handling (#3313)
+ * Fix command TimeDst/TimeStd invalid JSON (#3322)
+ * Fix handling of default names when using names starting with shortcut character ",0,1 or 2 (#3392, #3600, #3618)
+ * Fix LM75AD I2C sensor detection (#3408)
+ * Fix iFan02 power on state (#3412, #3530)
+ * Fix some Pow R2 and S31 checksum errors using optimized re-sync (#3425)
+ * Fix SDM120 reporting wrong negative values to Domoticz (#3521)
+ * Fix MQTT reconnection detection when using TasmotaMqtt library (#3558)
+ * Fix OtaMagic when file path contains a dash (-) (#3563)
+ * Fix Sonoff Bridge data reception when using Portisch EFM8 firmware using in data buffer length (#3605)
+ * Add read sensor retry to DS18B20, DS18x20, DHT, SHT1X and HTU21
+ * Add user selection of Wifi Smartconfig as define USE_SMARTCONFIG in user_config.h
+ * Add boot loop detection and perform some solutions
+ * Add wifi and mqtt status led blinkyblinky to be disabled by SetOption31 1. Does not work when LedPower is On (deliberate) (#871, #2230, #3114, #3155)
+ * Add support for TM1638 switch (#2226)
+ * Add GPIO options ButtonXn, SwitchXn and CounterXn to select INPUT mode instead of INPUT_PULLUP (#2525)
+ * Add support for APDS9960 proximity sensor (#3051)
+ * Add support for MPR121 controller in input mode for touch buttons (#3142)
+ * Add support for MCP230xx for general purpose input expansion and command Sensor29 (#3188)
+ * Add default Wifi Configuration tool as define WIFI_CONFIG_NO_SSID in user_config.h if no SSID is configured (#3224)
+ * Add command Timers 0/1 to globally disable or enable armed timers (#3270)
+ * Add support for CCS811 sensor (#3309)
+ * Add Turkish language file (#3332)
+ * Add command SerialSend4 to send binary serial data (#3345)
+ * Add initial support for sensor MPU6050 (#3352)
+ * Add rule triggers Wifi#Connected and Wifi#Disconnected (#3359)
+ * Add option + to command Rule to concatenate new rule with existing rules (#3365)
+ * Add message when JavaScript is not enabled in webbrowser (#3388)
+ * Add build time setting of ButtonTopic and SwitchTopic (#3414)
+ * Add iFan02 Fanspeed + and Fanspeed - command options (#3415)
+ * Add Individual HSBColorX commands (#3430, #3615)
+ * Add output support on MCP23008/MCP23017 (#3436)
+ * Add modulo option to rules like rule1 on Time#Minute|5 do backlog power on;delay 200;power off endon (#3466)
+ * Add RGB support for Domoticz (#3547)
+ * Add all ruletimer values to command RuleTimer result message (#3571)
+ * Add command Publish2 for publishing retained MQTT messages (#3593)
+ * Add commands ButtonDebounce 40..1000 and SwitchDebounce 40..1000 to have user control over debounce timing. Default is 50mS (#3594)
+ * Add RuleX debug options 8,9,10 (StopOnError) to control RuleX execution status after an exception restart (#3607)
+ * Add rule variables %sunrise%, %sunset%, %uptime% and %time% (#3608)
+ * Add optional MQTT_TELE_RETAIN to Energy Margins message (#3612, 3614)
+ *
+ * 6.1.1 20180714
+ * Revert wifi changes (#3177)
+ * Revert sonoff-minimal removals causing failure of wifi connection (#3177)
+ *
+ * 6.1.0 20180706
+ * Remove version 3, 4 and pre 5.2 settings auto-upgrade. See https://github.com/arendst/Sonoff-Tasmota/wiki/Upgrade#migration-path
+ * Change default CFG_HOLDER from 0x20161209 to 4617 (=0x1209) - no impact on default upgrades
+ * Change number of supported switches from 4 to 8 (#2885, #3086)
+ * Change BME680 driver from Adafruit to Bosch BME680 library (#2969)
+ * Fix Pzem004T checksum error
+ * Fix KNX bug when doing reply of sensors values
+ * Fix rules induced LWT message
+ * Fix possible wifi connection problem (#1366)
+ * Fix some Pow R2 and S31 checksum errors (#1907)
+ * Fix display selection of un-available GPIO options in Module Configuration webpage (#2718)
+ * Fix timer re-trigger within one minute after restart (#2744)
+ * Fix IRSend not accepting data value of 0 by David Conran (#2751)
+ * Fix vars on rules by Adrian Scillato (#2769)
+ * Fix bug in KNX menu by Adrian Scillato (#2770)
+ * Fix anomalies in rules (#2778)
+ * Fix HUE bridge V1 software version by Heiko Krupp (#2788)
+ * Fix Hardware Watchdog restart when using event command (#2853)
+ * Add Ukrainian language file
+ * Add KNX support for DS18S20 Temperature sensor
+ * Add CRC to Settings making future upgrades more fail-safe
+ * Add feature information to Status 4
+ * Add tools folder with python script decode-status.py for decoding some status fields like SetOption and Features
+ * Add Slots on the KNX Web Menu to select Group Addess to receive data to trigger rules
+ * Add two rule sets of 511 characters using commands rule1, rule2 and rule3
+ * Add Console Commands to send KNX Commands and KNX Values
+ * Add Slots on the KNX Web Menu to select Group Addess to send data from console commands
+ * Add Events to trigger rules when a command or read requests is received from KNX
+ * Add command SetOption30 to enforce Hass discovery as light group (#1784)
+ * Add support for BlitzWolf BW-SHP2 (and Homecube, Gosund SP1) Energy Monitoring Smart Socket (#2223)
+ * Add time in minutes to rule Time#Initialized, Time#set and Time#Minute (#2669)
+ * Add Eastron SDM630 energy meter by Gennaro Tortone (#2735)
+ * Add KNX communication enhancement by Adrian Scillato (#2742)
+ * Add KNX energy data by Adrian Scillato (#2750)
+ * Add rule support for IrReceive and RfReceive (#2758)
+ * Add python script fw-server.py in tools folder to create a simple OTA server by Gennaro Tortone (#2759)
+ * Add rule variables %time% for minutes since midnight, %uptime%, %sunrise% and %sunset% giving time in minutes (#2669)
+ * Add rules %mem1% to %mem5% variable names storing data in flash (#2780)
+ * Add rules test on %varx% or %memx% (#2780)
+ * Add optional token %id% substituting the unique MAC address to fulltopic by Michael Graf (#2794)
+ * Add support for Sonoff S26 Smart Socket (#2808)
+ * Add command WebSend [<host>(:<port>,<user>:<password>)] <command> (#2821)
+ * Add increment and decrement value to command Counter (#2838)
+ * Add support for Sonoff iFan02 as module 44 introducing command FanSpeed 0..3 (#2839)
+ * Add source information to command execution to be shown with logging option 3 (#2843)
+ * Add support for uploading Sonoff Bridge firmware found in tools/fw_efm8bb1 folder build by Portisch using Web Gui File Upload (#2886)
+ * Add command RfRaw to control Portisch firmware features
+ * Add support for I2C temperature sensor LM75AD (#2909)
+ * Add option 0 to command Timers disarming all timers (#2962)
+ * Add performance improvement when updating multiple individual WS2812 pixels (#3007)
+ * Add command SetOption28 to switch between hex or decimal Sonoff Bridge RF received data format (#3008)
+ * Add command SetOption29 to switch between hex or decimal IR received data format
+ * Add decimal values support for commands ADD, SUB, MULT and SCALE (#3083, #3089)
+ * Add support for bitflags SetOption50 .. SetOption81 (#3118)
+ *
+ * 5.14.0 20180515
  * Update language files
  * Update TasmotaSerial to 2.0.0 allowing Hardware Serial Fallback when correct connections are configured
  * Change command handling
@@ -11,13 +141,13 @@
  * Fix KNX config error (#2628)
  * Fix sensor MHZ-19 vanishing data over time (#2659)
  * Fix KNX reconnection issue (#2679)
- * Fix DST and STD time for Southern Hemisphere (#2684, #2714)
+ * Fix DST and STD time for Southern Hemisphere by Adrian Scillato (#2684, #2714)
  * Add Portuguese in Brazil language file
  * Add SetOption26 to enforce use of indexes even when only one relay is present (#1055)
  * Add support for sensor SI1145 UV Index / IR / Visible light (#2496)
  * Add rule state test for On/Off in addition to 0/1 (#2613)
  * Add hardware serial option to MHZ-19 sensor (#2659)
- * Add Eastron SDM120 energy meter (#2694)
+ * Add Eastron SDM120 energy meter by Gennaro Tortone (#2694)
  * Add user entry DST/STD using commands TimeStd and TimeDst (See wiki for parameter syntax) (#2721)
  *
  * 5.13.1 20180501
