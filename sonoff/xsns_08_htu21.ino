@@ -27,6 +27,8 @@
  * I2C Address: 0x40
 \*********************************************************************************************/
 
+#define XSNS_08             8
+
 #define HTU21_ADDR          0x40
 
 #define SI7013_CHIPID       0x0D
@@ -128,14 +130,18 @@ void HtuHeater(uint8_t heater)
   I2cWrite8(HTU21_ADDR, HTU21_WRITEREG, current);
 }
 
-void HtuInit()
+void HtuInit(void)
 {
   HtuReset();
   HtuHeater(HTU21_HEATER_OFF);
   HtuSetResolution(HTU21_RES_RH12_T14);
 }
 
+<<<<<<< HEAD
 float HtuReadHumidity(void)
+=======
+boolean HtuRead(void)
+>>>>>>> upstream/master
 {
   uint8_t  checksum = 0;
   uint16_t sensorval = 0;
@@ -211,7 +217,7 @@ float HtuCompensatedHumidity(float humidity, float temperature)
 
 /********************************************************************************************/
 
-void HtuDetect()
+void HtuDetect(void)
 {
   if (htu_type) {
     return;
@@ -247,6 +253,7 @@ void HtuDetect()
   }
 }
 
+<<<<<<< HEAD
 void HtuShow(boolean json)
 {
   if (htu_type) {
@@ -258,6 +265,32 @@ void HtuShow(boolean json)
     h = HtuCompensatedHumidity(h, t);
     dtostrfd(t, Settings.flag2.temperature_resolution, temperature);
     dtostrfd(h, Settings.flag2.humidity_resolution, humidity);
+=======
+void HtuEverySecond(void)
+{
+  if (92 == (uptime %100)) {
+    // 1mS
+    HtuDetect();
+  }
+  else if (uptime &1) {
+    // HTU21: 68mS, SI70xx: 37mS
+    if (htu_type) {
+      if (!HtuRead()) {
+        AddLogMissed(htu_types, htu_valid);
+//        if (!htu_valid) { htu_type = 0; }
+      }
+    }
+  }
+}
+
+void HtuShow(boolean json)
+{
+  if (htu_valid) {
+    char temperature[33];
+    dtostrfd(htu_temperature, Settings.flag2.temperature_resolution, temperature);
+    char humidity[33];
+    dtostrfd(htu_humidity, Settings.flag2.humidity_resolution, humidity);
+>>>>>>> upstream/master
 
     if (json) {
       snprintf_P(mqtt_data, sizeof(mqtt_data), JSON_SNS_TEMPHUM, mqtt_data, htu_types, temperature, humidity);
@@ -284,8 +317,6 @@ void HtuShow(boolean json)
 /*********************************************************************************************\
  * Interface
 \*********************************************************************************************/
-
-#define XSNS_08
 
 boolean Xsns08(byte function)
 {
