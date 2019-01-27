@@ -209,6 +209,7 @@
 //#define MY_LANGUAGE            pt-BR           // Portuguese in Brazil
 //#define MY_LANGUAGE            pt-PT           // Portuguese in Portugal
 //#define MY_LANGUAGE            ru-RU           // Russian in Russia
+//#define MY_LANGUAGE            sk-SK           // Slovak in Slovakia
 //#define MY_LANGUAGE            sv-SE           // Swedish in Sweden
 //#define MY_LANGUAGE            tr-TR           // Turkish in Turkey
 //#define MY_LANGUAGE            uk-UK           // Ukrainian in Ukrain
@@ -216,6 +217,7 @@
 //#define MY_LANGUAGE            zh-TW           // Chinese (Traditional) in Taiwan
 
 // -- Wifi Config tools ---------------------------
+#define WIFI_SOFT_AP_CHANNEL   1                 // Soft Access Point Channel number between 1 and 13 as used by Wifi Manager web GUI
 //#define USE_WPS                                  // Add support for WPS as initial wifi configuration tool (+33k code, 1k mem (5k mem with core v2.4.2+))
 //#define USE_SMARTCONFIG                          // Add support for Wifi SmartConfig as initial wifi configuration tool (+23k code, +0.6k mem)
 
@@ -247,6 +249,7 @@
 // -- MQTT - TLS ----------------------------------
   // !!! TLS uses a LOT OF MEMORY so be careful to enable other options at the same time !!!
 //#define USE_MQTT_TLS                             // Use TLS for MQTT connection (+53k code, +15k mem)
+//  #define USE_MQTT_TLS_CA_CERT                   // Use LetsEncrypt Certificate from sonoff_letsencrypt.h - Not supported with core 2.3.0
 
 // -- KNX IP Protocol -----------------------------
 //#define USE_KNX                                  // Enable KNX IP Protocol Support (+9.4k code, +3k7 mem)
@@ -313,7 +316,8 @@
 //    #define USE_PCA9685_FREQ 50                  // Define default PWM frequency in Hz to be used (must be within 24 to 1526) - If other value is used, it will rever to 50Hz
 //  #define USE_MPR121                             // Enable MPR121 controller (I2C addresses 0x5A, 0x5B, 0x5C and 0x5D) in input mode for touch buttons (+1k3 code)
 //  #define USE_CCS811                             // Enable CCS811 sensor (I2C address 0x5A) (+2k2 code)
-//  #define USE_MPU6050                            // Enable MPU6050 sensor (I2C address 0x68 AD0 low or 0x69 AD0 high) (+2k6 code)
+//  #define USE_MPU6050                            // Enable MPU6050 sensor (I2C address 0x68 AD0 low or 0x69 AD0 high) (+3K3 of code and 188 Bytes of RAM)
+//    #define USE_MPU6050_DMP                      // Enable in MPU6050 to use the DMP on the chip, should create better results (+8k6 of code)
 //  #define USE_DS3231                             // Enable DS3231 external RTC in case no Wifi is avaliable. See docs in the source file (+1k2 code)
 //    #define USE_RTC_ADDR  0x68                   // Default I2C address 0x68
 //  #define USE_MGC3130                            // Enable MGC3130 Electric Field Effect Sensor (I2C address 0x42) (+2k7 code, 0k3 mem)
@@ -356,6 +360,7 @@
 #define USE_SERIAL_BRIDGE                        // Add support for software Serial Bridge (+0k8 code)
 //#define USE_SDM120                               // Add support for Eastron SDM120-Modbus energy meter (+1k7 code)
   #define SDM120_SPEED         9600              // SDM120-Modbus RS485 serial speed (default: 2400 baud)
+  #define USE_SDM220                             // Add extra parameters for SDM220 (+0k1 code)
 //#define USE_SDM630                               // Add support for Eastron SDM630-Modbus energy meter (+2k code)
   #define SDM630_SPEED         9600              // SDM630-Modbus RS485 serial speed (default: 9600 baud)
 //#define USE_MP3_PLAYER                           // Use of the DFPlayer Mini MP3 Player RB-DFR-562 commands: play, volume and stop
@@ -363,7 +368,8 @@
 #define USE_TUYA_DIMMER                          // Add support for Tuya Serial Dimmer
   #define TUYA_DIMMER_ID       0                 // Default dimmer Id
 #define USE_ARMTRONIX_DIMMERS                    // Add support for Armtronix Dimmers (+1k4 code)
-#define USE_PS_16_DZ                             // ADD support for PS-16-DZ Dimmer
+#define USE_PS_16_DZ                             // Add support for PS-16-DZ Dimmer
+//#define USE_AZ7798                               // Add support for AZ-Instrument 7798 CO2 datalogger (+1k6 code)
 
 // Power monitoring sensors -----------------------
 #define USE_PZEM004T                             // Add support for PZEM004T Energy monitor (+2k code)
@@ -396,6 +402,10 @@
 #define USE_TX20_WIND_SENSOR                     // Add support for La Crosse TX20 anemometer (+2k code)
 
 #define USE_RC_SWITCH                            // Add support for RF transceiver using library RcSwitch (+2k7 code, 460 iram)
+
+//#define USE_RF_SENSOR                            // Add support for RF sensor receiver (434MHz or 868MHz) (+0k8 code)
+//  #define USE_THEO_V2                            // Add support for decoding Theo V2 sensors as documented on https://sidweb.nl using 434MHz RF sensor receiver (+1k4 code)
+//  #define USE_ALECTO_V2                          // Add support for decoding Alecto V2 sensors like ACH2010, WS3000 and DKW2012 weather stations using 868MHz RF sensor receiver (+1k7 code)
 
 /*********************************************************************************************\
  * Debug features are only supported in development branch
